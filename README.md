@@ -19,12 +19,15 @@ into sync with the other Pis.
 
 Setup
 -----
-0. 
-   `nvm install 0.12 && nvm use 0.12`  
-0.1 
-   `git clone https://github.com/anonette/node-omxplayer-sync.git`  
-0.2 
-   `cd node-omxplayer-sync-1 && npm install`   
+```
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
+nvm install 0.12
+nvm alias default 0.12
+nvm use 0.12
+git clone https://github.com/anonette/node-omxplayer-sync.git 
+cd node-omxplayer-sync
+npm install
+```
 1. Edit `config.local.js` to use the filename of your video file. See
    `config.js` for a list of other available settings.
 2. Copy your video file to the pi.
