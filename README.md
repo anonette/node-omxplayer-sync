@@ -24,7 +24,8 @@ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | 
 nvm install 0.12
 nvm alias default 0.12
 nvm use 0.12
-sudo apt update && sudo apt install git -y
+sudo apt update && sudo apt install git omxplayer -y
+sudo apt install omxplayer -y
 git clone https://github.com/anonette/node-omxplayer-sync.git 
 cd node-omxplayer-sync
 npm install
