@@ -35,6 +35,8 @@ npm install
 2. Copy your video file to the pi.
 3. Start the service using `node main.js` or use ansible.
 
+
+
 Video Format
 ------------
 
@@ -65,6 +67,22 @@ An example `config.local.js` file:
 
 Management
 ----------
+
+to clone the SD to deploy on many raspi deploy an edited img to all raspiberries.
+edit the stock img using 
+
+```
+$ sudo kpartx -av your-image.img 
+add map loop0p1 (252:5): 0 117187 linear /dev/loop0 1
+add map loop0p2 (252:6): 0 3493888 linear /dev/loop0 118784
+$ sudo mount /dev/mapper/loop0p2 /mnt
+
+"sudo umount /mnt" and "sudo kpartx -d your-image.img" when done.
+```
+[source](https://www.raspberrypi.org/forums/viewtopic.php?t=28860#p254654)
+
+
+
 
 Once the pis are running, you can access a control panel by opening a
 web browser and navigating to any of the pis using their hostnames or
