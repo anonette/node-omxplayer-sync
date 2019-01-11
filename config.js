@@ -31,7 +31,7 @@ module.exports = merge( {
   broadcastAddress: '255.255.255.255',
   // The filename to play. Probably easiest to leave this the same on every
   // player and just rename your file to match.
-  filename: '/home/pi/test.mp4',
+  filename: '/home/pi/video.mp4',
   // The hostname the master will be available at on the network. '.local' will
   // be appended.
   serviceName: 'players',
