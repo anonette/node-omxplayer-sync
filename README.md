@@ -27,6 +27,8 @@ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | 
 nvm install 0.12
 nvm alias default 0.12
 nvm use 0.12
+#for managing/starting the thing on boot
+npm install pm2
 sudo apt update
 sudo apt install git omxplayer byobu -y
 #d/l test video and rename to fit config.js
