@@ -26,6 +26,7 @@ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | 
 
 nvm install 0.12
 nvm alias default 0.12
+echo 'default' > ~/.nvmrc
 nvm use 0.12
 #for managing/starting the thing on boot
 npm install pm2
