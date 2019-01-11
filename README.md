@@ -65,10 +65,9 @@ An example `config.local.js` file:
       smoothingWindowMs: 1e3 / FPS * 15
     };
 
-Management
-----------
 
-to clone the SD to deploy on many raspi deploy an edited img to all raspiberries.
+### Deploy
+to deploy an edited img to all raspiberries.
 edit the stock img using 
 
 ```
@@ -82,7 +81,14 @@ $ sudo mount /dev/mapper/loop0p2 /mnt
 [source](https://www.raspberrypi.org/forums/viewtopic.php?t=28860#p254654)
 
 
+### to clone 
+to clone a working raspi to an img file try  
+```
+sudo dd bs=4M if=/dev/sdb |pv | gzip > /home/your_username/image`date +%d%m%y`.gz
+```
 
+Management
+----------
 
 Once the pis are running, you can access a control panel by opening a
 web browser and navigating to any of the pis using their hostnames or
