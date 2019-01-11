@@ -96,13 +96,10 @@ network={
 ```
 add ssh-key to pi
 ```
-sudo mkdir /mnt/pi/rootfs/home/pi/.ssh
-sudo chmod 700 /mnt/pi/rootfs/home/pi/.ssh/
-sudo chmod 600 /mnt/pi/rootfs/home/pi/.ssh/authorized_keys
-#copy to clipbaord (from remote) 
-xclip ~/.ssh/anonette.pub 
-#open and paste to auth_keys
-sudo nano /mnt/pi/rootfs/home/pi/.ssh/authorized_keys
+mkdir -p /mnt/pi/rootfs/home/pi/.ssh
+sudo cat ~/.ssh/anonette.pub >>  /mnt/pi/rootfs/home/pi/.ssh/authorized_keys
+sudo chown -R 1000:1000 /mnt/pi/rootfs/home/pi/.ssh/
+
 ```
 
 you can also add a script to d/l and setup all dependenices, see [here](https://www.mathieupassenaud.fr/cloudinit-rpi/) or using [pibekary](https://github.com/davidferguson/pibakery)
