@@ -81,9 +81,14 @@ sudo touch /mnt/pi/boot/ssh
 ```
 and `wpa_supplicant.conf` with your wifi conf (if you are going to use wifi)
 ```
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+country=«your_ISO-3166-1_two-letter_country_code»
+
 network={
-    ssid="testing"
-    psk="testingPassword"
+    ssid="«your_SSID»"
+    psk="«your_PSK»"
+    key_mgmt=WPA-PSK
 }
 ```
 
@@ -97,10 +102,10 @@ sudo kpartx -d 2018-11-13-raspbian-stretch-lite.img
 [source](https://www.raspberrypi.org/forums/viewtopic.php?t=28860#p254654)
 
 
-### to clone 
-to clone a working raspi to an img file try  
+### Write
+to write to SDcard 
 ```
-sudo dd bs=4M if=/dev/sdb |pv | gzip > /home/your_username/image`date +%d%m%y`.gz
+sudo dd bs=4M if=2018-11-13-raspbian-stretch-lite.img of=/dev/sdc status=progress oflag=sync
 ```
 
 ## Management
