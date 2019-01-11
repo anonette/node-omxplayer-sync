@@ -105,8 +105,6 @@ sudo chown -R 1000:1000 /mnt/pi/rootfs/home/pi/.ssh/
 
 ```
 
-you can also add a script to d/l and setup all dependenices, see [here](https://www.mathieupassenaud.fr/cloudinit-rpi/) or using [pibekary](https://github.com/davidferguson/pibakery)
-
 when done , unmount
 ```
 sudo umount /mnt/pi/boot && sudo umount /mnt/pi/rootfs
@@ -114,12 +112,7 @@ sudo kpartx -d 2018-11-13-raspbian-stretch-lite.img
 ```
 [source](https://www.raspberrypi.org/forums/viewtopic.php?t=28860#p254654)
 
-
-### Write
-to write to SDcard 
-```
-sudo dd bs=4M if=2018-11-13-raspbian-stretch-lite.img of=/dev/sdc status=progress oflag=sync
-```
+included is a script that will mount/unmount and write the edited img to your SDcard, see `rsp-mount.sh`
 
 ## Management
 
