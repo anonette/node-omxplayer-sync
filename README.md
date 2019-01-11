@@ -17,8 +17,8 @@ peer-to-peer protocol to figure out how to stay in sync. You can remove
 and add Pis while the cluster is running, and they will quickly fall
 into sync with the other Pis.
 
-Setup
------
+## Setup
+
 ```
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
 nvm install 0.12
@@ -37,16 +37,14 @@ npm install
 
 
 
-Video Format
-------------
+## Video Format
 
 Video files should not be temporally compressed (eg. MJPEG or Apple
 PRORES), or they should have a very low GOP length (the interval between
 i-frames or keyframes). You can use `script/get_keyframe_intervals` to
 inspect the GOP of a file (depends on ffmpeg and ffprobe).
 
-Configuration
--------------
+## Configuration
 
 Default configuration resides in [config.js](config.js). The default
 configuration can be overriden by creating a `config.local.js` file. See
@@ -67,16 +65,34 @@ An example `config.local.js` file:
 
 
 ### Deploy
-to deploy an edited img to all raspiberries.
-edit the stock img using 
+to deploy an edited img to all raspiberries. use kparttx to mount the img  
+
 
 ```
-$ sudo kpartx -av your-image.img 
-add map loop0p1 (252:5): 0 117187 linear /dev/loop0 1
-add map loop0p2 (252:6): 0 3493888 linear /dev/loop0 118784
-$ sudo mount /dev/mapper/loop0p2 /mnt
+sudo pacman -S kaprtx 
+sudo kpartx -av 2018-11-13-raspbian-stretch-lite.img
+sudo mkdir -p /mnt/pi/boot && sudo mkdir -p /mnt/pi/rootfs
+sudo mount /dev/mapper/loop0p1 /mnt/pi/boot
+sudo mount /dev/mapper/loop0p2 /mnt/pi/rootfs
+```
+edit the stock img, add `ssh` to boot mount 
+```
+sudo touch /mnt/pi/boot/ssh
+```
+and `wpa_supplicant.conf` with your wifi conf (if you are going to use wifi)
+```
+network={
+    ssid="testing"
+    psk="testingPassword"
+}
+```
 
-"sudo umount /mnt" and "sudo kpartx -d your-image.img" when done.
+you can also add a script to d/l and setup all dependenices, see [here](https://www.mathieupassenaud.fr/cloudinit-rpi/) or using [pibekary](https://github.com/davidferguson/pibakery)
+
+when done , unmount
+```
+sudo umount /mnt/pi/boot && sudo umount /mnt/pi/rootfs
+sudo kpartx -d 2018-11-13-raspbian-stretch-lite.img
 ```
 [source](https://www.raspberrypi.org/forums/viewtopic.php?t=28860#p254654)
 
@@ -87,8 +103,7 @@ to clone a working raspi to an img file try
 sudo dd bs=4M if=/dev/sdb |pv | gzip > /home/your_username/image`date +%d%m%y`.gz
 ```
 
-Management
-----------
+## Management
 
 Once the pis are running, you can access a control panel by opening a
 web browser and navigating to any of the pis using their hostnames or
@@ -107,8 +122,7 @@ perform the following actions:
 * Halt: turn off all the players' hardware. You will need to power cycle
   the players to get them to restart.
 
-Technical Overview
-------------------
+## Technical Overview
 
 The control software is written in Node.js, uses OMXPlayer to play the
 video, and OSC to talk over the network. The controller uses a
