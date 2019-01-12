@@ -28,8 +28,6 @@ nvm install 0.12
 nvm alias default 0.12
 echo 'default' > ~/.nvmrc
 nvm use 0.12
-#for managing/starting the thing on boot
-npm install pm2
 sudo apt update
 sudo apt install git omxplayer byobu -y
 #d/l test video and rename to fit config.js
@@ -41,10 +39,36 @@ npm install
 ```
 1. Edit `config.local.js` to use the filename of your video file. See
    `config.js` for a list of other available settings.
-2. Copy your video file to the pi.
-3. Start the service using `node main.js` or use ansible.
 
+2. Start the service using `node main.js` 
 
+### start on boot
+add service file at `/etc/systemd/system/omx.service`
+
+```
+[Unit]
+Description=node-omxplayer-sync
+After=network.target
+
+[Service]
+ExecStart=/home/pi/node-omxplayer-sync/launcher.sh
+WorkingDirectory=/home/pi/node-omxplayer-sync
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target
+```
+and a launcher.sh  
+```
+#!/bin/bash
+. /home/pi/.nvm/nvm.sh
+nvm run default main.js 
+```
+see [docs]
+9https://www.raspberrypi.org/documentation/linux/usage/systemd.md) for more
 
 ## Video Format
 
